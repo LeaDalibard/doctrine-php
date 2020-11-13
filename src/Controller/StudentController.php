@@ -9,6 +9,7 @@ use App\Form\StudentFormType;
 use App\Form\TeacherFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -55,12 +56,42 @@ class StudentController extends AbstractController
     public function students()
     {
         $students = $this->getDoctrine()->getRepository(Student::class)->findAll();
-        //$test=json_encode($students, JSON_PRETTY_PRINT);
         return $this->render('student/students.html.twig', [
             "students" => $students
         ]);
     }
 
+    /**
+     * @Route("/students-json/{id}", name="get_one_student", methods={"GET"})
+     */
+    public function getStudentJson($id): JsonResponse
+    {
+        $student = $this->getDoctrine()->getRepository(Student::class)->find($id);
+
+        $data = new JsonResponse([
+            'id' => $student->getId(),
+            'firstName' => $student->getFirstName(),
+            'lastName' => $student->getLastName(),
+            'email' => $student->getEmail(),
+            'teacher' => [$student->getTeacher()->getFirstName(),$student->getTeacher()->getLastName()],
+        ]);
+        $data->setEncodingOptions( $data->getEncodingOptions() | JSON_PRETTY_PRINT );
+        return $data;
+    }
+
+    /**
+     * @Route("/students-json", name="get_students")
+     */
+    public function getStudentJson(): JsonResponse
+    {
+        $students = $this->getDoctrine()->getRepository(Student::class)->findAll();
+        $data =  JsonResponse::fromJsonString($students);
+
+        //$data=json_decode(json_encode($students, true,JSON_PRETTY_PRINT));
+        return $this->render('student/json.html.twig', [
+            "students" => $data
+        ]);
+    }
     /**
      * @Route("/student/{id}", name="student")
      */
