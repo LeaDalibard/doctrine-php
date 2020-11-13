@@ -73,4 +73,26 @@ class RestStudentController extends AbstractController
         ]);
 
     }
+
+    /**
+     * @Route("/update-student/{id}", name="updateStudent")
+     */
+    public function modifyProduct(Request $request, int $id): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $student = $entityManager->getRepository(Student::class)->find($id);
+        $form = $this->createForm(StudentFormType::class, $student);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager->flush();
+        }
+
+        return $this->render("rest_student/student-form.html.twig", [
+            "form_title" => "Update student",
+            "form_student" => $form->createView(),
+        ]);
+    }
     }
