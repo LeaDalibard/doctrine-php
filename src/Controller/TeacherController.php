@@ -86,4 +86,26 @@ class TeacherController extends AbstractController
         return $this->redirectToRoute("teachers");
     }
 
+    /**
+     * @Route("/update-teacher/{id}", name="updateTeacher")
+     */
+    public function updateTeacher(Request $request, int $id): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $teacher = $entityManager->getRepository(Teacher::class)->find($id);
+        $form = $this->createForm(TeacherFormType::class, $teacher);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager->flush();
+        }
+
+        return $this->render("teacher/teacher-form.html.twig", [
+            "form_title_teacher" => "Update teacher",
+            "form_teacher" => $form->createView(),
+        ]);
+    }
+
 }

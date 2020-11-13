@@ -77,7 +77,7 @@ class StudentController extends AbstractController
     /**
      * @Route("/update-student/{id}", name="updateStudent")
      */
-    public function modifyProduct(Request $request, int $id): Response
+    public function updateStudent(Request $request, int $id): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
 
