@@ -17,6 +17,7 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
             </thead>
             <tbody>
             <td>{{ student.id }}</td>
@@ -30,8 +31,7 @@
             <td>{{ student.address.city}}</td>
             <td><a href="{{ path('student', {'id': student.id}) }}">Details</a></td>
             <td><a href="{{ path('updateStudent', {'id': student.id}) }}">Update</a></td>
-
-
+            <td><a href="{{ path('deleteStudent', {'id': student.id}) }}">Delete</a></td>
 
             </tbody>
         </table>

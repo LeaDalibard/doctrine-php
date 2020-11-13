@@ -95,4 +95,17 @@ class RestStudentController extends AbstractController
             "form_student" => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/delete-student/{id}", name="deleteStudent")
+     */
+    public function deleteProduct(int $id): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $student = $entityManager->getRepository(Student::class)->find($id);
+        $entityManager->remove($student);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("students");
+    }
     }
