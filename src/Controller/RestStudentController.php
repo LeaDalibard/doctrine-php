@@ -25,7 +25,7 @@ class RestStudentController extends AbstractController
     }
 
     /**
-     * @Route("/RestStudent", name="RestStudent")
+     * @Route("/Add-Student", name="AddStudent")
      */
     public function addStudent(Request $request): Response
     {
@@ -48,5 +48,17 @@ class RestStudentController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/students", name="students")
+     */
+
+    public function students()
+    {
+        $students = $this->getDoctrine()->getRepository(Student::class)->findAll();
+        //$test=json_encode($students, JSON_PRETTY_PRINT);
+        return $this->render('rest_student/students.html.twig', [
+            "students" => $students
+        ]);
+    }
 
 }

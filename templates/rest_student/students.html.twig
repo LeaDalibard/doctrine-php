@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Students list</h1>
+    <p><a href="{{ path('AddStudent') }}">Register a student</a></p>
+    {% for student in students %}
+        <table>
+            <thead>
+            <th>ID</th>
+            <th>First name :</th>
+            <th>Last name :</th>
+            <th>Email :</th>
+            <th>Teacher :</th>
+            <th>Adress :</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            </thead>
+            <tbody>
+            <td>{{ student.id }}</td>
+            <td>{{ student.firstName }}</td>
+            <td>{{ student.lastName }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.teacher.firstName}} {{student.teacher.lastName }}</td>
+            <td>{{ student.address.street}}</td>
+            <td>{{ student.address.streetNumber}}</td>
+            <td>{{ student.address.zipcode}}</td>
+            <td>{{ student.address.city}}</td>
+
+
+            </tbody>
+        </table>
+    {% endfor %}
+{% endblock %}
