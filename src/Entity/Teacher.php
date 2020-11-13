@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\TeacherRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,14 +36,14 @@ class Teacher
     private $email;
 
     /**
-     * @ORM\OneToMany(targetEntity=Student::class, mappedBy="teacher")
-     */
-    private $students;
-
-    /**
      * @ORM\Embedded(class = "Address")
      */
     private $address;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Student", mappedBy="teacher")
+     */
+    private $students;
 
 
     public function __construct()
@@ -100,6 +101,7 @@ class Teacher
     {
         return $this->students;
     }
+
 
     public function addStudent(Student $student): self
     {

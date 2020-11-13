@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>Teacher</h1>
+    <h2>ID :</h2>
+    <p>{{ teacher.id }}</p>
+    <h2>First name :</h2>
+    <p>{{ teacher.firstName }}</p>
+    <h2>Last name :</h2>
+    <p>{{ teacher.lastName }}</p>
+    <h2>Email :</h2>
+    <p>{{ teacher.email }}</p>
+
+    <h2>Address : </h2>
+    <p>{{ teacher.address.street}}, {{ teacher.address.streetNumber}}</p>
+    <p>{{ teacher.address.city}}, {{ teacher.address.zipcode}}</p>
+
+    <h2>Students : </h2>
+
+    {% for student in students %}
+        <table>
+            <thead>
+            <th>First name :</th>
+            <th>Last name :</th>
+            <th>Email :</th>
+            </thead>
+            <tbody>
+            <td>{{ student.firstName }}</td>
+            <td>{{ student.lastName }}</td>
+            <td>{{ student.email }}</td>
+            </tbody>
+        </table>
+    {% endfor %}
+
+{% endblock %}
