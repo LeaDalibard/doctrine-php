@@ -59,5 +59,31 @@ class TeacherController extends AbstractController
 
     }
 
+    /**
+     * @Route("/teacher/{id}", name="teacher")
+     */
+    public function product(int $id): Response
+    {
+        $teacher=new Teacher();
+        $teacher = $this->getDoctrine()->getRepository(Teacher::class)->find($id);
+        $students=$teacher->getStudents();
+        return $this->render("teacher/teacher.html.twig", [
+            "teacher" => $teacher,
+            "students"=>$students,
+        ]);
+
+    }
+
+    /**
+     * @Route("/delete-teacher/{id}", name="deleteTeacher")
+     */
+    public function deleteTeacher(int $id): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $teacher = $entityManager->getRepository(Teacher::class)->find($id);
+        $entityManager->remove($teacher);
+        $entityManager->flush();
+        return $this->redirectToRoute("teachers");
+    }
 
 }

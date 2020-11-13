@@ -12,15 +12,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class RestStudentController extends AbstractController
+class StudentController extends AbstractController
 {
     /**
-     * @Route("/rest/student", name="rest_student")
+     * @Route("/rest/student", name="student")
      */
     public function index(): Response
     {
-        return $this->render('rest_student/index.html.twig', [
-            'controller_name' => 'RestStudentController',
+        return $this->render('student/index.html.twig', [
+            'controller_name' => 'StudentController',
         ]);
     }
 
@@ -42,7 +42,7 @@ class RestStudentController extends AbstractController
 
         }
 
-        return $this->render("rest_student/student-form.html.twig", [
+        return $this->render("student/student-form.html.twig", [
             "form_title" => "Register student",
             "form_student" => $form->createView(),
         ]);
@@ -56,7 +56,7 @@ class RestStudentController extends AbstractController
     {
         $students = $this->getDoctrine()->getRepository(Student::class)->findAll();
         //$test=json_encode($students, JSON_PRETTY_PRINT);
-        return $this->render('rest_student/students.html.twig', [
+        return $this->render('student/students.html.twig', [
             "students" => $students
         ]);
     }
@@ -68,7 +68,7 @@ class RestStudentController extends AbstractController
     {
         $student = $this->getDoctrine()->getRepository(Student::class)->find($id);
 
-        return $this->render("rest_student/student.html.twig", [
+        return $this->render("student/student.html.twig", [
             "student" => $student,
         ]);
 
@@ -90,7 +90,7 @@ class RestStudentController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->render("rest_student/student-form.html.twig", [
+        return $this->render("student/student-form.html.twig", [
             "form_title" => "Update student",
             "form_student" => $form->createView(),
         ]);
@@ -99,7 +99,7 @@ class RestStudentController extends AbstractController
     /**
      * @Route("/delete-student/{id}", name="deleteStudent")
      */
-    public function deleteProduct(int $id): Response
+    public function deleteStudent(int $id): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $student = $entityManager->getRepository(Student::class)->find($id);

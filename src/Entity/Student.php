@@ -39,7 +39,9 @@ class Student
 
     /**
      * @ORM\ManyToOne(targetEntity=Teacher::class, inversedBy="students")
+     * @ORM\JoinColumn(name="teacher_id",referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
+
     private $teacher;
 
     public function __construct()
