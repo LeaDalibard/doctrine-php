@@ -15,6 +15,7 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
             </thead>
             <tbody>
             <td>{{ student.id }}</td>
@@ -26,6 +27,8 @@
             <td>{{ student.address.streetNumber}}</td>
             <td>{{ student.address.zipcode}}</td>
             <td>{{ student.address.city}}</td>
+            <td><a href="{{ path('student', {'id': student.id}) }}">Details</a></td>
+
 
 
             </tbody>

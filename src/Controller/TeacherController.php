@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Student;
 use App\Entity\Teacher;
 use App\Form\TeacherFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,6 +43,20 @@ class TeacherController extends AbstractController
             "form_title_teacher" => "Register teacher",
             "form_teacher" => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/teachers", name="teachers")
+     */
+
+    public function teachers()
+    {
+        $teachers = $this->getDoctrine()->getRepository(Teacher::class)->findAll();
+
+        return $this->render('teacher/teachers.html.twig', [
+            "teachers" => $teachers
+        ]);
+
     }
 
 

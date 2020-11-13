@@ -61,4 +61,16 @@ class RestStudentController extends AbstractController
         ]);
     }
 
-}
+    /**
+     * @Route("/student/{id}", name="student")
+     */
+    public function product(int $id): Response
+    {
+        $student = $this->getDoctrine()->getRepository(Student::class)->find($id);
+
+        return $this->render("rest_student/student.html.twig", [
+            "student" => $student,
+        ]);
+
+    }
+    }

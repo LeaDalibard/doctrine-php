@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>Student</h1>
+    <h2>ID :</h2>
+    <p>{{ student.id }}</p>
+    <h2>First name :</h2>
+    <p>{{ student.firstName }}</p>
+    <h2>Last name :</h2>
+    <p>{{ student.lastName }}</p>
+    <h2>Email :</h2>
+    <p>{{ student.email }}</p>
+    <h2>Teacher :</h2>
+    <p>{{ student.teacher.firstName}} {{student.teacher.lastName }}</p>
+    <h2>Address : </h2>
+    <p>{{ student.address.street}}, {{ student.address.streetNumber}}</p>
+    <p>{{ student.address.city}}, {{ student.address.zipcode}}</p>
+
+{% endblock %}
