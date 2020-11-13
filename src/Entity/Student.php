@@ -33,7 +33,7 @@ class Student
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Embedded(class = "Address")
      */
     private $address;
 
@@ -41,6 +41,12 @@ class Student
      * @ORM\ManyToOne(targetEntity=Teacher::class, inversedBy="students")
      */
     private $teacher;
+
+    public function __construct()
+    {
+        $this->address = new Address();
+    }
+
 
     public function getId(): ?int
     {
@@ -83,12 +89,12 @@ class Student
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getAddress(): ?Address
     {
         return $this->address;
     }
 
-    public function setAddress(string $address): self
+    public function setAddress(Address $address): self
     {
         $this->address = $address;
 

@@ -39,10 +39,18 @@ class Teacher
      */
     private $students;
 
+    /**
+     * @ORM\Embedded(class = "Address")
+     */
+    private $address;
+
+
     public function __construct()
     {
         $this->students = new ArrayCollection();
+        $this->address = new Address();
     }
+
 
     public function getId(): ?int
     {
@@ -111,6 +119,18 @@ class Teacher
                 $student->setTeacher(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(Address $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }
