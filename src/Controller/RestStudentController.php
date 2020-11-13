@@ -6,6 +6,7 @@ use App\Entity\Address;
 use App\Entity\Student;
 use App\Entity\Teacher;
 use App\Form\StudentFormType;
+use App\Form\TeacherFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,4 +47,6 @@ class RestStudentController extends AbstractController
             "form_student" => $form->createView(),
         ]);
     }
+
+
 }
